@@ -1,6 +1,7 @@
 package com.sittingseat.sittingseat.domain;
 
 import com.sittingseat.sittingseat.enums.FoodCategoryEnum;
+import com.sittingseat.sittingseat.enums.RoleEnum;
 import com.sittingseat.sittingseat.enums.VeganEnum;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -25,6 +26,9 @@ public class Member extends BaseEntity{
     private String nickname;
     private String provider;
 
+    @Enumerated(value = EnumType.STRING)
+    private RoleEnum authority;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
@@ -37,6 +41,7 @@ public class Member extends BaseEntity{
         this.phone = phone;
         this.nickname = nickname;
         this.provider = provider;
+        this.authority = RoleEnum.USER;
     }
 
     public void updateMember(String name, String email, String password, String phone, String nickname, String provider){

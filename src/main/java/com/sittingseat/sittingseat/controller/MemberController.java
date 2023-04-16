@@ -1,6 +1,8 @@
 package com.sittingseat.sittingseat.controller;
 
 import com.sittingseat.sittingseat.dto.MemberJoinDto;
+import com.sittingseat.sittingseat.dto.MemberLoginDto;
+import com.sittingseat.sittingseat.dto.TokenInfo;
 import com.sittingseat.sittingseat.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
@@ -27,5 +29,12 @@ public class MemberController {
     public ResponseEntity<Void> join(@RequestBody MemberJoinDto memberJoinDto){
         memberService.join(memberJoinDto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<TokenInfo> login(@RequestBody MemberLoginDto memberLoginDto){
+        TokenInfo tokenInfo = memberService.login(memberLoginDto.getEmail(), memberLoginDto.getPassword());
+
+        return new ResponseEntity<>(tokenInfo, HttpStatus.OK);
     }
 }
