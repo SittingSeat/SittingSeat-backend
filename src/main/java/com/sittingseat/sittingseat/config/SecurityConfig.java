@@ -1,20 +1,26 @@
 package com.sittingseat.sittingseat.config;
 
+import com.sittingseat.sittingseat.filter.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     private final String[] PUBLIC_URL = {
             "/members/join",
-            "/members/join"
+            "/members/login"
     };
 
     private final String[] SWAGGER_URL = {
@@ -44,8 +50,17 @@ public class SecurityConfig {
             .antMatchers(PUBLIC_URL).permitAll()
             .antMatchers("/members/user").hasRole("USER")
             .antMatchers("/members/admin").hasRole("ADMIN")
-            .anyRequest().authenticated();
+            .anyRequest().authenticated()
+            .and()
+
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder encoder(){
+        return new BCryptPasswordEncoder();
     }
 
 }

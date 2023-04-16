@@ -3,12 +3,13 @@ package com.sittingseat.sittingseat.enums;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
 @AllArgsConstructor
-public enum FoodCategoryEnum {
-    KOREAN_FOOD("KOREAN_FOOD"), CHINESE_FOOD("CHINESE_FOOD"), JAPANESE_FOOD("JAPANESE_FOOD");
+public enum RoleEnum {
+    USER("USER"), STORE("STORE"), ADMIN("ADMIN");
 
     @JsonValue
-    private final String foodCategory;
+    private final String role;
 }
