@@ -20,7 +20,6 @@ public class PrincipalDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member findMember = memberRepository.findByEmail(username)
                 .orElseThrow(() -> new SittingSeatException(SittingSeatErrorCode.MEMBER_NOT_FOUND));
-
         return new PrincipalDetails(findMember);
     }
 }

@@ -6,8 +6,10 @@ import com.sittingseat.sittingseat.dto.TokenInfo;
 import com.sittingseat.sittingseat.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Api(tags = "회원 관련 API 컨트롤러")
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/members")
@@ -30,7 +33,11 @@ public class MemberController {
         memberService.join(memberJoinDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
+
+    @Operation(summary = "이메일 로그인", description = "이메일 로그인 API")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "이메일 로그인 성공"),
+    })
     @PostMapping("/login")
     public ResponseEntity<TokenInfo> login(@RequestBody MemberLoginDto memberLoginDto){
         TokenInfo tokenInfo = memberService.login(memberLoginDto.getEmail(), memberLoginDto.getPassword());

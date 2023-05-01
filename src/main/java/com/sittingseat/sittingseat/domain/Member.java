@@ -1,6 +1,7 @@
 package com.sittingseat.sittingseat.domain;
 
 import com.sittingseat.sittingseat.enums.FoodCategoryEnum;
+import com.sittingseat.sittingseat.enums.ProviderEnum;
 import com.sittingseat.sittingseat.enums.RoleEnum;
 import com.sittingseat.sittingseat.enums.VeganEnum;
 import lombok.AccessLevel;
@@ -24,7 +25,8 @@ public class Member extends BaseEntity{
     private String password;
     private String phone;
     private String nickname;
-    private String provider;
+    @Enumerated(value = EnumType.STRING)
+    private ProviderEnum provider;
 
     @Enumerated(value = EnumType.STRING)
     private RoleEnum authority;
@@ -34,7 +36,7 @@ public class Member extends BaseEntity{
     private Reservation reservation;
 
     @Builder
-    public Member(String name, String email, String password, String phone, String nickname, String provider) {
+    public Member(String name, String email, String password, String phone, String nickname, ProviderEnum provider) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -44,7 +46,7 @@ public class Member extends BaseEntity{
         this.authority = RoleEnum.USER;
     }
 
-    public void updateMember(String name, String email, String password, String phone, String nickname, String provider){
+    public void updateMember(String name, String email, String password, String phone, String nickname, ProviderEnum provider){
         this.name = name;
         this.email = email;
         this.password = password;
@@ -55,6 +57,19 @@ public class Member extends BaseEntity{
 
     public void createReservation(Reservation reservation){
         this.reservation = reservation;
+    }
+
+    public static Member toEntity(Long id, String name, String email, String password, String phone, String nickname, ProviderEnum provider){
+        Member member = new Member();
+        member.id = id;
+        member.name = name;
+        member.email = email;
+        member.password = password;
+        member.phone = phone;
+        member.nickname = nickname;
+        member.provider = provider;
+        member.authority = RoleEnum.USER;
+        return member;
     }
 
 }

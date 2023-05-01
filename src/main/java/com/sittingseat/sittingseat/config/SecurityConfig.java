@@ -20,7 +20,11 @@ public class SecurityConfig {
 
     private final String[] PUBLIC_URL = {
             "/members/join",
-            "/members/login"
+            "/members/login",
+            "/mail/authentication",
+            "/auth/**",
+            "/oauth2/**",
+            "/login/**"
     };
 
     private final String[] SWAGGER_URL = {
@@ -45,12 +49,15 @@ public class SecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
 
+//            .oauth2Login()
+//            .and()
+
             .authorizeRequests()
             .antMatchers(SWAGGER_URL).permitAll()
             .antMatchers(PUBLIC_URL).permitAll()
             .antMatchers("/members/user").hasRole("USER")
             .antMatchers("/members/admin").hasRole("ADMIN")
-            .anyRequest().authenticated()
+            .anyRequest().permitAll()
             .and()
 
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
