@@ -1,5 +1,6 @@
-package com.sittingseat.sittingseat.domain;
+package com.sittingseat.sittingseat.shopkeeper.domain;
 
+import com.sittingseat.sittingseat.domain.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Restaurant extends BaseEntity{
+public class Restaurant extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurant_id")
     private Long id;
@@ -20,7 +21,7 @@ public class Restaurant extends BaseEntity{
     private String greeting;
     private LocalDateTime openTime;
     private LocalDateTime closeTime;
-    private Integer reservationUnit;
+    private Integer reservationTimeUnit;
     private String location;
     private String phone;
     private String SnsLink;
@@ -33,7 +34,7 @@ public class Restaurant extends BaseEntity{
             String greeting,
             LocalDateTime openTime,
             LocalDateTime closeTime,
-            Integer reservationUnit,
+            Integer reservationTimeUnit,
             String location,
             String phone,
             String snsLink,
@@ -44,7 +45,7 @@ public class Restaurant extends BaseEntity{
         this.greeting = greeting;
         this.openTime = openTime;
         this.closeTime = closeTime;
-        this.reservationUnit = reservationUnit;
+        this.reservationTimeUnit = reservationTimeUnit;
         this.location = location;
         this.phone = phone;
         SnsLink = snsLink;

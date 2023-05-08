@@ -1,5 +1,6 @@
 package com.sittingseat.sittingseat.domain;
 
+import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

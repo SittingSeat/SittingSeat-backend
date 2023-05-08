@@ -1,5 +1,6 @@
 package com.sittingseat.sittingseat.domain;
 
+import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,5 +33,10 @@ public class Review extends BaseEntity{
         this.content = content;
         this.restaurant = restaurant;
         this.member = member;
+    }
+
+    public void updateReview(Double score, String content){
+        this.score = score;
+        this.content = content;
     }
 }

@@ -14,8 +14,13 @@ public enum SittingSeatErrorCode {
     EXPIRED_TOKEN(401, "만료된 토큰입니다.", "J005"),
 
     // Member
-    MEMBER_NOT_FOUND(400, "해당 회원이 존재하지 않습니다.", "M001")
+    MEMBER_NOT_FOUND(400, "해당 회원이 존재하지 않습니다.", "M001"),
 
+    // Restaurant
+    RESTAURANT_NOT_FOUND(400, "해당 가게가 존재하지 않습니다.", "RT001"),
+
+    // Review
+    REVIEW_NOT_FOUND(400, "해당 리뷰가 존재하지 않습니다.", "RV001"),
 
     ;
 

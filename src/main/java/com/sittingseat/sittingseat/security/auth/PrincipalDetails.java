@@ -1,6 +1,7 @@
 package com.sittingseat.sittingseat.security.auth;
 
 import com.sittingseat.sittingseat.domain.Member;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Component
+@Getter
 @NoArgsConstructor
 public class PrincipalDetails implements UserDetails {
     private Member member;

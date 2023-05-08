@@ -1,5 +1,7 @@
-package com.sittingseat.sittingseat.domain;
+package com.sittingseat.sittingseat.shopkeeper.domain;
 
+import com.sittingseat.sittingseat.domain.BaseEntity;
+import com.sittingseat.sittingseat.domain.Reservation;
 import com.sittingseat.sittingseat.enums.TableStateEnum;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Seat extends BaseEntity{
+public class Seat extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_id")
     private Long id;
