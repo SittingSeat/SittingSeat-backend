@@ -1,6 +1,7 @@
 package com.sittingseat.sittingseat.shopkeeper.domain;
 
 import com.sittingseat.sittingseat.domain.BaseEntity;
+import com.sittingseat.sittingseat.domain.ImageFile;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,6 +30,9 @@ public class Restaurant extends BaseEntity {
     private String SnsLink;
     private String blogLink;
     private Integer totalTableCount;
+
+//    private List<ImageFile> menus = new ArrayList<>();
+//    private List<ImageFile> interiors = new ArrayList<>();
 
     @Builder
     public Restaurant(
@@ -51,5 +57,13 @@ public class Restaurant extends BaseEntity {
         SnsLink = snsLink;
         this.blogLink = blogLink;
         this.totalTableCount = totalTableCount;
+    }
+
+    public void addMenuImages(){
+
+    }
+
+    public void addInteriorImages(){
+
     }
 }

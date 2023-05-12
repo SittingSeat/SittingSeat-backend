@@ -66,6 +66,17 @@ spring:
           ssl:
             #trust: smtp.naver.com
             enable: true #반드시 필요 -> SSL 필요로 되어있으면
+cloud:
+  aws:
+    s3:
+      bucket: sittingseat
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+    credentials:
+      accessKey: AKIAXW4DDD5LZRII4EWE
+      secretKey: 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
 
 jwt:
   secretKey: 5f929e80d1a736e32ac586b80416d187ab46541995306a70c1c7f83bdc3609ec3477a921e6f7c330663d7b528b15c29c0b9ae191135e0de11fd11fa7e5388d60

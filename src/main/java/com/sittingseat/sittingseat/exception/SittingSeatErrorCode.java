@@ -22,6 +22,9 @@ public enum SittingSeatErrorCode {
     // Review
     REVIEW_NOT_FOUND(400, "해당 리뷰가 존재하지 않습니다.", "RV001"),
 
+    // S3
+    S3_ACCESS_DENIED(401, "S3 접근에 실패하였습니다.", "S001"),
+
     ;
 
     private int status;

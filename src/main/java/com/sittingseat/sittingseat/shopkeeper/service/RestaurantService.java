@@ -19,7 +19,7 @@ public class RestaurantService {
     private final SeatRepository seatRepository;
 
     @Transactional
-    public void registerRestaurant(RestaurantRequest restaurantRequest){
+    public Restaurant registerRestaurant(RestaurantRequest restaurantRequest){
         Restaurant restaurant = Restaurant.builder()
                 .name(restaurantRequest.getName())
                 .greeting(restaurantRequest.getGreeting())
@@ -45,7 +45,7 @@ public class RestaurantService {
             seatRepository.save(seat);
         }
 
-        restaurantRepository.save(restaurant);
+        return restaurantRepository.save(restaurant);
     }
 
     @Transactional

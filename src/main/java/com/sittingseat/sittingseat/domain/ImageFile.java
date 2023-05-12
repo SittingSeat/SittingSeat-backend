@@ -2,6 +2,7 @@ package com.sittingseat.sittingseat.domain;
 
 import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,11 @@ public class ImageFile extends BaseEntity{
 
     private String s3ImagePath;
     private String originalImageName;
+
+    @Builder
+    public ImageFile(String s3ImagePath, String originalImageName, Restaurant restaurant){
+        this.s3ImagePath = s3ImagePath;
+        this.originalImageName = originalImageName;
+        this.restaurant = restaurant;
+    }
 }

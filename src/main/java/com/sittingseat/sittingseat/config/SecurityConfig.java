@@ -24,7 +24,8 @@ public class SecurityConfig {
             "/mail/authentication",
             "/auth/**",
             "/oauth2/**",
-            "/login/**"
+            "/login/**",
+            "/restaurant/**"
     };
 
     private final String[] SWAGGER_URL = {
