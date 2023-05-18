@@ -23,10 +23,15 @@ public class Reservation extends BaseEntity{
     private LocalDateTime time;
     private Integer numberOfPeople;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     @Builder
-    public Reservation(Restaurant restaurant, LocalDateTime time, Integer numberOfPeople) {
+    public Reservation(Restaurant restaurant, LocalDateTime time, Integer numberOfPeople, Member member) {
         this.restaurant = restaurant;
         this.time = time;
         this.numberOfPeople = numberOfPeople;
+        this.member = member;
     }
 }

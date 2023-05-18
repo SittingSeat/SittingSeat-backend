@@ -35,4 +35,8 @@ public class Seat extends BaseEntity {
         this.tableState = tableState;
         this.reservation = reservation;
     }
+
+    public void updateSeatState(TableStateEnum tableState){
+        this.tableState = tableState;
+    }
 }

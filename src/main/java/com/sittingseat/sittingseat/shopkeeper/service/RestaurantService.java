@@ -4,12 +4,16 @@ import com.sittingseat.sittingseat.domain.Member;
 import com.sittingseat.sittingseat.enums.TableStateEnum;
 import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
 import com.sittingseat.sittingseat.shopkeeper.domain.Seat;
+import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantDto;
 import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantRequest;
 import com.sittingseat.sittingseat.shopkeeper.repository.RestaurantRepository;
 import com.sittingseat.sittingseat.shopkeeper.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,5 +55,25 @@ public class RestaurantService {
     @Transactional
     public void removeRestaurant(Long removeRestaurantId){
         restaurantRepository.deleteById(removeRestaurantId);
+    }
+
+    public List<RestaurantDto> findAll(){
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        List<RestaurantDto> result = restaurants.stream()
+                .map((r) -> new RestaurantDto(
+                        r.getId(),
+                        r.getName(),
+                        r.getGreeting(),
+                        r.getOpenTime(),
+                        r.getCloseTime(),
+                        r.getReservationTimeUnit(),
+                        r.getLocation(),
+                        r.getPhone(),
+                        r.getSnsLink(),
+                        r.getBlogLink(),
+                        r.getTotalTableCount()
+                ))
+                .collect(Collectors.toList());
+        return result;
     }
 }

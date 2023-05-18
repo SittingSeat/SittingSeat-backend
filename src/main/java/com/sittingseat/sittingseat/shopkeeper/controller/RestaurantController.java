@@ -3,6 +3,7 @@ package com.sittingseat.sittingseat.shopkeeper.controller;
 import com.sittingseat.sittingseat.domain.Member;
 import com.sittingseat.sittingseat.security.auth.PrincipalDetails;
 import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
+import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantDto;
 import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantRequest;
 import com.sittingseat.sittingseat.shopkeeper.service.RestaurantService;
 import com.sittingseat.sittingseat.shopkeeper.service.S3Service;
@@ -47,6 +48,13 @@ public class RestaurantController {
     public ResponseEntity<Void> removeRestaurant(@PathVariable Long restaurantId){
         restaurantService.removeRestaurant(restaurantId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<RestaurantDto>> findAllRestaurant(){
+        List<RestaurantDto> restaurants = restaurantService.findAll();
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
 
 }

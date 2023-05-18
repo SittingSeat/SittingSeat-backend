@@ -27,7 +27,7 @@ public class Restaurant extends BaseEntity {
     private Integer reservationTimeUnit;
     private String location;
     private String phone;
-    private String SnsLink;
+    private String snsLink;
     private String blogLink;
     private Integer totalTableCount;
 
@@ -54,7 +54,7 @@ public class Restaurant extends BaseEntity {
         this.reservationTimeUnit = reservationTimeUnit;
         this.location = location;
         this.phone = phone;
-        SnsLink = snsLink;
+        this.snsLink = snsLink;
         this.blogLink = blogLink;
         this.totalTableCount = totalTableCount;
     }

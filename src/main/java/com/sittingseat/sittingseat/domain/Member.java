@@ -31,10 +31,6 @@ public class Member extends BaseEntity{
     @Enumerated(value = EnumType.STRING)
     private RoleEnum authority;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reservation_id")
-    private Reservation reservation;
-
     @Builder
     public Member(String name, String email, String password, String phone, String nickname, ProviderEnum provider) {
         this.name = name;
@@ -53,10 +49,6 @@ public class Member extends BaseEntity{
         this.phone = phone;
         this.nickname = nickname;
         this.provider = provider;
-    }
-
-    public void createReservation(Reservation reservation){
-        this.reservation = reservation;
     }
 
     public static Member toEntity(Long id, String name, String email, String password, String phone, String nickname, ProviderEnum provider){
