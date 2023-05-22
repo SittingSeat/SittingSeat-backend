@@ -1,8 +1,8 @@
 spring:
   config.activate.on-profile: default
   datasource:
-    url: jdbc:mysql://localhost:3306/SittingSeat?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
+    url: jdbc:mysql://sittingseat-db.czymyzxo0gbq.ap-northeast-2.rds.amazonaws.com:3306/SittingSeat?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: admin
     password: password!23
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
