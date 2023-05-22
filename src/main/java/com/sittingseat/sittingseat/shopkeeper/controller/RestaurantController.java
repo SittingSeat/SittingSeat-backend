@@ -7,6 +7,10 @@ import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantDto;
 import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantRequest;
 import com.sittingseat.sittingseat.shopkeeper.service.RestaurantService;
 import com.sittingseat.sittingseat.shopkeeper.service.S3Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@Api(tags = "식당 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/restaurant")
@@ -23,6 +28,12 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
     private final S3Service s3Service;
 
+    @Operation(summary = "식당 등록 API", description = "form-data형태로 요청 필요. data-RestaurantRequest, menus-List<Multipart>, interiors-List<Multipart> ")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "식당 정상 등록"),
+            @ApiResponse(code = 401, message = "S3 접근 실패"),
+
+    })
     @PostMapping(value = "/register", consumes = {"multipart/form-data"})
     public ResponseEntity<Void> registerRestaurant(
             @RequestPart("data") RestaurantRequest restaurantRequest,
@@ -44,6 +55,10 @@ public class RestaurantController {
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
 
+    @Operation(summary = "식당 삭제 API", description = "PathVariable로 삭제할 식당 id 전송 필요.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "식당 삭제 성공"),
+    })
     @PostMapping("/remove/{restaurantId}")
     public ResponseEntity<Void> removeRestaurant(@PathVariable Long restaurantId){
         restaurantService.removeRestaurant(restaurantId);
@@ -51,6 +66,10 @@ public class RestaurantController {
     }
 
 
+    @Operation(summary = "전체 식당 검색 API", description = "전체 식당을 검색한다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "식당 전체 조회 성공"),
+    })
     @GetMapping("/all")
     public ResponseEntity<List<RestaurantDto>> findAllRestaurant(){
         List<RestaurantDto> restaurants = restaurantService.findAll();
