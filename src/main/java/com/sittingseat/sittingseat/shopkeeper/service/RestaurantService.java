@@ -1,6 +1,5 @@
 package com.sittingseat.sittingseat.shopkeeper.service;
 
-import com.sittingseat.sittingseat.domain.Member;
 import com.sittingseat.sittingseat.enums.TableStateEnum;
 import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
 import com.sittingseat.sittingseat.shopkeeper.domain.Seat;
