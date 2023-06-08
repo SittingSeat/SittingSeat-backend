@@ -4,14 +4,14 @@ import com.querydsl.core.annotations.QueryProjection;
 import com.sittingseat.sittingseat.domain.ImageFile;
 import com.sittingseat.sittingseat.enums.FoodCategoryEnum;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-public class RestaurantDto {
+@Data
+public class RestaurantResponse {
+
     private Long id;
     private String name;
     private String greeting;
@@ -24,12 +24,11 @@ public class RestaurantDto {
     private String blogLink;
     private Integer totalTableCount;
     private FoodCategoryEnum category;
+    private List<ImageFileDto> imagePaths;
+    private double reviewScore;
+    private int reviewCount;
 
-
-    @QueryProjection
-    public RestaurantDto(Long id, String name, String greeting, LocalDateTime openTime, LocalDateTime closeTime,
-                         Integer reservationTimeUnit, String location, String phone, String snsLink, String blogLink,
-                         Integer totalTableCount, FoodCategoryEnum category) {
+    public RestaurantResponse(Long id, String name, String greeting, LocalDateTime openTime, LocalDateTime closeTime, Integer reservationTimeUnit, String location, String phone, String snsLink, String blogLink, Integer totalTableCount, FoodCategoryEnum category, List<ImageFileDto> imagePaths, double reviewScore, int reviewCount) {
         this.id = id;
         this.name = name;
         this.greeting = greeting;
@@ -42,5 +41,8 @@ public class RestaurantDto {
         this.blogLink = blogLink;
         this.totalTableCount = totalTableCount;
         this.category = category;
+        this.imagePaths = imagePaths;
+        this.reviewScore = reviewScore;
+        this.reviewCount = reviewCount;
     }
 }

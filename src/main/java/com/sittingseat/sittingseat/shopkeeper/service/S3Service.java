@@ -2,6 +2,7 @@ package com.sittingseat.sittingseat.shopkeeper.service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.sittingseat.sittingseat.enums.ImageEnum;
 import com.sittingseat.sittingseat.exception.SittingSeatErrorCode;
 import com.sittingseat.sittingseat.exception.SittingSeatException;
 import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
@@ -41,10 +42,10 @@ public class S3Service {
     }
 
     @Transactional
-    public void uploadFiles(List<MultipartFile> multipartFiles, String dirName, String subDirName, Restaurant restaurant){
+    public void uploadFiles(List<MultipartFile> multipartFiles, String dirName, String subDirName, Restaurant restaurant, ImageEnum imageType){
         for (MultipartFile multipartFile : multipartFiles) {
             String s3ImagePath = uploadFile(multipartFile, dirName, subDirName);
-            imageFileService.saveImage(s3ImagePath, multipartFile.getOriginalFilename(), restaurant);
+            imageFileService.saveImage(imageType, s3ImagePath, multipartFile.getOriginalFilename(), restaurant);
         }
     }
 }

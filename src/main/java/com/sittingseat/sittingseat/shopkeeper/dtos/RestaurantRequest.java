@@ -1,5 +1,6 @@
 package com.sittingseat.sittingseat.shopkeeper.dtos;
 
+import com.sittingseat.sittingseat.enums.FoodCategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -17,6 +18,7 @@ public class RestaurantRequest {
     private String telephoneNumber;
     private String instagram;
     private String blog;
+    private FoodCategoryEnum category;
 
     private SeatRequest seatRequest;
 

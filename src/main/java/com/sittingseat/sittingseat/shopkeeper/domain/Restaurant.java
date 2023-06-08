@@ -2,6 +2,7 @@ package com.sittingseat.sittingseat.shopkeeper.domain;
 
 import com.sittingseat.sittingseat.domain.BaseEntity;
 import com.sittingseat.sittingseat.domain.ImageFile;
+import com.sittingseat.sittingseat.enums.FoodCategoryEnum;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Restaurant extends BaseEntity {
     private String snsLink;
     private String blogLink;
     private Integer totalTableCount;
+    private FoodCategoryEnum category;
 
 //    private List<ImageFile> menus = new ArrayList<>();
 //    private List<ImageFile> interiors = new ArrayList<>();
@@ -45,7 +47,8 @@ public class Restaurant extends BaseEntity {
             String phone,
             String snsLink,
             String blogLink,
-            Integer totalTableCount
+            Integer totalTableCount,
+            FoodCategoryEnum foodCategoryEnum
     ) {
         this.name = name;
         this.greeting = greeting;
@@ -57,6 +60,7 @@ public class Restaurant extends BaseEntity {
         this.snsLink = snsLink;
         this.blogLink = blogLink;
         this.totalTableCount = totalTableCount;
+        this.category = foodCategoryEnum;
     }
 
     public void addMenuImages(){

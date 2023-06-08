@@ -1,10 +1,13 @@
 package com.sittingseat.sittingseat.shopkeeper.controller;
 
 import com.sittingseat.sittingseat.domain.Member;
+import com.sittingseat.sittingseat.enums.ImageEnum;
 import com.sittingseat.sittingseat.security.auth.PrincipalDetails;
 import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
+import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantCategoryRequest;
 import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantDto;
 import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantRequest;
+import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantResponse;
 import com.sittingseat.sittingseat.shopkeeper.service.RestaurantService;
 import com.sittingseat.sittingseat.shopkeeper.service.S3Service;
 import io.swagger.annotations.Api;
@@ -44,8 +47,8 @@ public class RestaurantController {
         String dirName = "restaurant/" + restaurantName;
         Restaurant restaurant = restaurantService.registerRestaurant(restaurantRequest);
 
-        s3Service.uploadFiles(menuImages, dirName, "menus", restaurant);
-        s3Service.uploadFiles(interiorImages, dirName, "interiors", restaurant);
+        s3Service.uploadFiles(menuImages, dirName, "menus", restaurant, ImageEnum.MENU);
+        s3Service.uploadFiles(interiorImages, dirName, "interiors", restaurant, ImageEnum.INTERIOR);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -71,8 +74,29 @@ public class RestaurantController {
             @ApiResponse(code = 200, message = "식당 전체 조회 성공"),
     })
     @GetMapping("/all")
-    public ResponseEntity<List<RestaurantDto>> findAllRestaurant(){
-        List<RestaurantDto> restaurants = restaurantService.findAll();
+    public ResponseEntity<List<RestaurantResponse>> findAllRestaurant(){
+        List<RestaurantResponse> restaurants = restaurantService.findAll();
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+    }
+
+    @Operation(summary = "식당 이름 검색 API", description = "식당 이름을 검색한다. 이름이 포함되어 있는 식당 다 검색된다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "식당 이름 검색 성공")
+    })
+    @GetMapping("/{restaurantName}")
+    public ResponseEntity<List<RestaurantResponse>> findRestaurantByName(@PathVariable String restaurantName){
+        List<RestaurantResponse> restaurants = restaurantService.findByName(restaurantName);
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+    }
+
+    @Operation(summary = "식당 종류 검색 API", description = "식당 종류를 통해 필터링할 수 있다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "식당 카테고리 필터링 성공")
+    })
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<RestaurantResponse>> findRestaurantByCategories(@RequestBody RestaurantCategoryRequest categoryRequest){
+        List<RestaurantResponse> restaurants = restaurantService.findByCategory(categoryRequest.getCategories());
         return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
 
