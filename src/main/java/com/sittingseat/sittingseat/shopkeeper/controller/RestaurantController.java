@@ -1,11 +1,9 @@
 package com.sittingseat.sittingseat.shopkeeper.controller;
 
-import com.sittingseat.sittingseat.domain.Member;
+import com.sittingseat.sittingseat.dto.Result;
 import com.sittingseat.sittingseat.enums.ImageEnum;
-import com.sittingseat.sittingseat.security.auth.PrincipalDetails;
 import com.sittingseat.sittingseat.shopkeeper.domain.Restaurant;
 import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantCategoryRequest;
-import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantDto;
 import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantRequest;
 import com.sittingseat.sittingseat.shopkeeper.dtos.RestaurantResponse;
 import com.sittingseat.sittingseat.shopkeeper.service.RestaurantService;
@@ -17,7 +15,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -74,9 +71,9 @@ public class RestaurantController {
             @ApiResponse(code = 200, message = "식당 전체 조회 성공"),
     })
     @GetMapping("/all")
-    public ResponseEntity<List<RestaurantResponse>> findAllRestaurant(){
+    public ResponseEntity<Result<List<RestaurantResponse>>> findAllRestaurant(){
         List<RestaurantResponse> restaurants = restaurantService.findAll();
-        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+        return new ResponseEntity<>(new Result<>(restaurants), HttpStatus.OK);
     }
 
     @Operation(summary = "식당 이름 검색 API", description = "식당 이름을 검색한다. 이름이 포함되어 있는 식당 다 검색된다.")
@@ -84,9 +81,9 @@ public class RestaurantController {
             @ApiResponse(code = 200, message = "식당 이름 검색 성공")
     })
     @GetMapping("/{restaurantName}")
-    public ResponseEntity<List<RestaurantResponse>> findRestaurantByName(@PathVariable String restaurantName){
+    public ResponseEntity<Result<List<RestaurantResponse>>> findRestaurantByName(@PathVariable String restaurantName){
         List<RestaurantResponse> restaurants = restaurantService.findByName(restaurantName);
-        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+        return new ResponseEntity<>(new Result<>(restaurants), HttpStatus.OK);
     }
 
     @Operation(summary = "식당 종류 검색 API", description = "식당 종류를 통해 필터링할 수 있다.")
@@ -95,9 +92,9 @@ public class RestaurantController {
     })
 
     @GetMapping("/categories")
-    public ResponseEntity<List<RestaurantResponse>> findRestaurantByCategories(@RequestBody RestaurantCategoryRequest categoryRequest){
+    public ResponseEntity<Result<List<RestaurantResponse>>> findRestaurantByCategories(@RequestBody RestaurantCategoryRequest categoryRequest){
         List<RestaurantResponse> restaurants = restaurantService.findByCategory(categoryRequest.getCategories());
-        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+        return new ResponseEntity<>(new Result<>(restaurants), HttpStatus.OK);
     }
 
 }

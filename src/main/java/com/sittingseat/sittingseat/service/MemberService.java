@@ -81,4 +81,5 @@ public class MemberService {
         return memberRepository.findByEmail(email)
                 .orElseThrow(()-> new SittingSeatException(SittingSeatErrorCode.MEMBER_NOT_FOUND));
     }
+
 }

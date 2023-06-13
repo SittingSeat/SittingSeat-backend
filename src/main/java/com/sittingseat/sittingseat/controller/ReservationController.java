@@ -1,12 +1,11 @@
 package com.sittingseat.sittingseat.controller;
 
-import com.sittingseat.sittingseat.domain.Member;
 import com.sittingseat.sittingseat.dto.ReservationDto;
 import com.sittingseat.sittingseat.dto.ReservationRequest;
+import com.sittingseat.sittingseat.dto.Result;
 import com.sittingseat.sittingseat.security.auth.PrincipalDetails;
 import com.sittingseat.sittingseat.service.ReservationService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,9 +47,9 @@ public class ReservationController {
             @ApiResponse(code = 400, message = "회원 존재하지 않음")
     })
     @GetMapping("/my")
-    public ResponseEntity<List<ReservationDto>> findByMember(@AuthenticationPrincipal PrincipalDetails principalDetails){
+    public ResponseEntity<Result<List<ReservationDto>>> findByMember(@AuthenticationPrincipal PrincipalDetails principalDetails){
         Long memberId = principalDetails.getMember().getId();
         List<ReservationDto> reservations = reservationService.findByMember(memberId);
-        return new ResponseEntity<>(reservations, HttpStatus.OK);
+        return new ResponseEntity<>(new Result<>(reservations), HttpStatus.OK);
     }
 }
