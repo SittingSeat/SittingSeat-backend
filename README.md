@@ -74,4 +74,5 @@ We welcome contributions to enhance the SittingSeat Backend application. If you 
 
 Feel free to fork the project and adapt it to your needs! If you have any questions or need assistance, please don't hesitate to contact us or open an issue on the GitHub repository.
 
-Check out the [GitHub repository](https://github.com/SittingSeat/SittingSeat-backend) for more information and updates on the project. Happy coding!
+Check out the [GitHub repository](https://github.com/SittingSeat/SittingSeat-backend) for more information and updates on the project. Happy coding! <br>
+Made by AutoReadme Project (https://github.com/dongsuu/auto-generate-readme)
